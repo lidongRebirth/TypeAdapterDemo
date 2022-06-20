@@ -10,6 +10,7 @@ import com.myfittinglife.typeadapterdemo.entities.Graph
 import com.myfittinglife.typeadapterdemo.entities.ListBean
 import com.myfittinglife.typeadapterdemo.entities.TestBean
 import com.myfittinglife.typeadapterdemo.nulllist.MyCollectionTypeAdapterFactory
+import com.myfittinglife.typeadapterdemo.nulllist.MyTypeAdapterFactory2
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -231,10 +232,20 @@ class MainActivity : AppCompatActivity() {
 
             //-----------验证Object转String是否正确
             val listBean = ListBean("张帅", listOf())
+//            val listBean = ListBean("张帅", setOf())
             val listBeanStr = stackOverflowGson.toJson(listBean)
             val listBeanStr2 = myGson.toJson(listBean)
             Log.i(TAG, "listBeanStr:$listBeanStr")
             Log.i(TAG, "listBeanStr2:$listBeanStr2")
+
+
+            //Java方式实现测试
+            val javaGson = GsonBuilder().registerTypeAdapterFactory(MyTypeAdapterFactory2()).create()
+            val javaBean  =javaGson.fromJson<ListBean>(str,ListBean::class.java)
+            Log.i(TAG, "onCreate: javaBean：$javaBean")
+            val javaStr = javaGson.toJson(listBean)
+            Log.i(TAG, "onCreate: javaStr:$javaStr")
+
         }
     }
 }

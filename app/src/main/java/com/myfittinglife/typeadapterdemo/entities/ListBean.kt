@@ -7,5 +7,9 @@ package com.myfittinglife.typeadapterdemo.entities
  * @Modify
  */
 data class ListBean(val name: String, val language: List<String>)
+//data class ListBean(val name: String, val language: Set<String>)
 //data class ListBean(val name: String, val language: ArrayList<String>)
+
+
+
 
